@@ -10,3 +10,7 @@ Solution: inside terminal type `go env -w GO111MODULE=auto` (1 -> One, not L in 
 #### To Run 
 > 1. Double click on .exe file
 > 2. type `go run <file_name.go>`
+
+<ol>
+    <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/go-server" target=_blank>GO-SERVER</a></li>
+</ol>
