@@ -3,8 +3,12 @@ This Repo contains small projects on go language to touch various aspects of Go 
 
 ## About
 This shows basic CRUD i.e. Create, Read (Get), Update and Delete operation of an Rest Api.
-<br>Local structure has been used as storage.<br>
-No Db has been used.
+<br>Local structure has been used as storage.
+<br>No Db has been used.
+<br>`github.com/gorilla/mux` is being used as request router and dispatcher for incoming request.
+<br>*Postman* has been used and also attahced with the project.
+<br>**Note**
+<br>Please make required changes for port number and Bood id if needed.
 
 #### To Build Book-Store-Crud project
 > type "go build" inside terminal.
