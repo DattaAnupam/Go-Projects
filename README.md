@@ -1,7 +1,12 @@
 # Go-Projects
 This Repo contains small projects on go language to touch various aspects of Go Language
 
-#### To Build
+## About
+This shows basic CRUD i.e. Create, Read (Get), Update and Delete operation of an Rest Api.
+<br>Local structure has been used as storage.<br>
+No Db has been used.
+
+#### To Build Book-Store-Crud project
 > type "go build" inside terminal.
 
 #### Error: `go: go.mod file not found in current directory or any parent directory;...`
@@ -9,9 +14,6 @@ Solution: inside terminal type `go env -w GO111MODULE=auto` (1 -> One, not L in 
 
 #### To Run 
 > 1. Double click on .exe file
-> 2. type `go run <file_name.go>`
+> 2. type `go run main.go`
 
-#### List of Projects:
-<ol>
-    <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/go-server" target=_blank>GO-SERVER</a></li>
-</ol>
+By default the server runs on port :8080
