@@ -15,3 +15,6 @@ Solution: inside terminal type `go env -w GO111MODULE=auto` (1 -> One, not L in 
 <ol>
     <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/go-server" target=_blank>GO-SERVER</a></li>
 </ol>
+<ol>
+    <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/book-store-crud" target=_blank>BOOG-STORE-CRUD</a></li>
+</ol>
