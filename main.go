@@ -83,7 +83,24 @@ func createMovieHandler(w http.ResponseWriter, r *http.Request) {
 // PUT
 // Update a movie by id
 func updateMovieHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 
+	params := mux.Vars(r)
+
+	var newMovie Movie
+
+	_ = json.NewDecoder(r.Body).Decode(&newMovie)
+
+	for index, movie := range movies {
+		if movie.ID == params["id"] {
+			newMovie.ID = params["id"]
+			movies[index] = newMovie
+			// Return updated movie
+			json.NewEncoder(w).Encode(newMovie)
+
+			break
+		}
+	}
 }
 
 // DELETE
