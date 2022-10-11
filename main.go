@@ -39,17 +39,23 @@ func getMoviesHandler(w http.ResponseWriter, r *http.Request) {
 func getMovieHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
+	// finding status flag
+	foundMovie := false
+
 	params := mux.Vars(r)
 
 	for _, movie := range movies {
 		if movie.ID == params["id"] {
 			json.NewEncoder(w).Encode(movie)
+			foundMovie = true
 			break
 		}
 	}
 
 	// If not found return empty data
-	json.NewEncoder(w).Encode(Movie{})
+	if !foundMovie {
+		json.NewEncoder(w).Encode(Movie{})
+	}
 }
 
 // POST
@@ -67,7 +73,19 @@ func updateMovieHandler(w http.ResponseWriter, r *http.Request) {
 // DELETE
 // Delete a movie by id
 func deleteMovieHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 
+	params := mux.Vars(r)
+
+	for index, movie := range movies {
+		if movie.ID == params["id"] {
+			movies = append(movies[:index], movies[index+1:]...)
+			break
+		}
+	}
+
+	// return rest of the movies
+	json.NewEncoder(w).Encode(movies)
 }
 
 func main() {
