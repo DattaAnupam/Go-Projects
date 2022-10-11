@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -23,12 +24,14 @@ type Director struct {
 }
 
 // Slice of movies, dummy for db
-var Movies []Movie
+var movies []Movie
 
 // GET
 // Get all movies
 func getMoviesHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 
+	json.NewEncoder(w).Encode(movies)
 }
 
 // GET
@@ -59,12 +62,16 @@ func main() {
 	// Create new Router
 	r := mux.NewRouter()
 
+	// Init movies
+	movies = append(movies, Movie{ID: "1", Isbn: "123456", Title: "First Movie", Director: &Director{Firstname: "Anupam", Lastname: "Datta"}})
+	movies = append(movies, Movie{ID: "2", Isbn: "345678", Title: "Second Movie", Director: &Director{Firstname: "Second", Lastname: "Director"}})
+
 	// Create Routes and Handlers
-	r.HandleFunc("api/movies", getMoviesHandler).Methods("GET")
-	r.HandleFunc("api/movies/{id}", getMovieHandler).Methods("GET")
-	r.HandleFunc("api/movies", createMovieHandler).Methods("POST")
-	r.HandleFunc("api/movies/{id}", updateMovieHandler).Methods("PUT")
-	r.HandleFunc("api/movies/{id}", deleteMovieHandler).Methods("DELETE")
+	r.HandleFunc("/api/movies", getMoviesHandler).Methods("GET")
+	r.HandleFunc("/api/movies/{id}", getMovieHandler).Methods("GET")
+	r.HandleFunc("/api/movies", createMovieHandler).Methods("POST")
+	r.HandleFunc("/api/movies/{id}", updateMovieHandler).Methods("PUT")
+	r.HandleFunc("/api/movies/{id}", deleteMovieHandler).Methods("DELETE")
 
 	// Initiate and Start Server
 	fmt.Println("Starting server at port 8080")
