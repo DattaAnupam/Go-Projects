@@ -14,11 +14,7 @@ Solution: inside terminal type `go env -w GO111MODULE=auto` (1 -> One, not L in 
 #### List of Projects:
 <ol>
     <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/go-server" target=_blank>GO-SERVER</a></li>
-</ol>
-<ol>
     <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/book-store-crud" target=_blank>BOOK-STORE-CRUD</a></li>
-</ol>
-<ol>
     <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/movie-management-crud" target=_blank>MOVIE-MANAGEMENT-CRUD</a></li>
 </ol>
 
