@@ -37,7 +37,19 @@ func getMoviesHandler(w http.ResponseWriter, r *http.Request) {
 // GET
 // Get a movie by id
 func getMovieHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 
+	params := mux.Vars(r)
+
+	for _, movie := range movies {
+		if movie.ID == params["id"] {
+			json.NewEncoder(w).Encode(movie)
+			break
+		}
+	}
+
+	// If not found return empty data
+	json.NewEncoder(w).Encode(Movie{})
 }
 
 // POST
