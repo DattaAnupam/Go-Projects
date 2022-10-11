@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/mux"
 )
@@ -37,10 +39,10 @@ func getMoviesHandler(w http.ResponseWriter, r *http.Request) {
 // GET
 // Get a movie by id
 func getMovieHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-
-	// finding status flag
+	// movie found status flag
 	foundMovie := false
+
+	w.Header().Set("Content-Type", "application/json")
 
 	params := mux.Vars(r)
 
@@ -61,7 +63,21 @@ func getMovieHandler(w http.ResponseWriter, r *http.Request) {
 // POST
 // Create a movie
 func createMovieHandler(w http.ResponseWriter, r *http.Request) {
+	var movie Movie
 
+	w.Header().Set("Content-Type", "application/json")
+
+	// Decode request
+	_ = json.NewDecoder(r.Body).Decode(&movie)
+
+	// Set Id of new movie
+	movie.ID = strconv.Itoa(rand.Intn(10000))
+
+	// Add new movie to the collection
+	movies = append(movies, movie)
+
+	// Return newly created movie
+	json.NewEncoder(w).Encode(movie)
 }
 
 // PUT
