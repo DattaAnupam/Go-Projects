@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"main/go-projects/pkg/controllers"
+	"main/pkg/controllers"
 
 	"github.com/gorilla/mux"
 )
