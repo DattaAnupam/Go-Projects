@@ -20,3 +20,7 @@ bin/
 
 # Unignore all `.exe` in `bin` dir
 !*/bin/*.exe
+
+# Ignore all mod & sum files
+*.mod
+*.sum
