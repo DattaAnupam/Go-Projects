@@ -12,7 +12,7 @@ var (
 // Connect to the Sql Db
 func Connect() {
 	// dsn = Data Source Name
-	dsn := "root:MyPass123!mYsql@tcp(localhost:3306)/mytestdb?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:<MySqlPassword>@tcp(localhost:3306)/mytestdb?charset=utf8mb4&parseTime=True&loc=Local"
 	d, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
