@@ -17,5 +17,6 @@ Solution: inside terminal type `go env -w GO111MODULE=auto` (1 -> One, not L in 
     <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/book-store-crud" target=_blank>BOOK-STORE-CRUD</a></li>
     <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/movie-management-crud" target=_blank>MOVIE-MANAGEMENT-CRUD</a></li>
     <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/book-management-crud" target=_blank>BOOK-MANAGEMENT-CRUD</a></li>
+    <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/go-with-mysql" target=_blank>GO-WITH-MYSQL</a></li>
 </ol>
 
