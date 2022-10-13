@@ -21,6 +21,7 @@ This shows basic CRUD i.e. Create, Read (Get), Update and Delete operation of an
     <li>Keep Root Password handy. You will get it during installation.</li>
     <li>Set `PATH` variable. You can learn it from <a href="https://www.tutorialspoint.com/adding-mysql-to-windows-path">here</a></li>
 </ol>
+
 #### To Build Book-Management-Crud project
 > go to main directory, inside pkg directory.
 > type "go build".
