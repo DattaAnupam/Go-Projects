@@ -80,13 +80,15 @@ func UpdateBook(w http.ResponseWriter, r *http.Request) {
 func DeleteBook(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	bookId := params["bookId"]
+
 	ID, err := strconv.ParseInt(bookId, 0, 0)
 	if err != nil {
 		fmt.Println("Error while parsing")
 	}
 
-	book := models.DeleteBook(ID)
-	res, _ := json.Marshal(book)
+	deletedBook := models.DeleteBookById(ID)
+
+	res, _ := json.Marshal(deletedBook)
 	w.Header().Set("Content-Type", "pkglication/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
