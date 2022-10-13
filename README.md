@@ -36,3 +36,6 @@ Solution: inside terminal type `go env -w GO111MODULE=auto` (1 -> One, not L in 
 #### To Build + Run
 type
 > `go build && ./go-with-sql.exe`
+<br>Note
+<br>name_of_the_.exe = name_of_the_module
+<br>please make changes accordingly.
