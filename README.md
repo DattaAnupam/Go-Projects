@@ -33,4 +33,33 @@ Solution: inside terminal type `go env -w GO111MODULE=auto` (1 -> One, not L in 
 > 2. type `go run main.go`
 
 By default the server runs on port :8080
-Sql server is running on port: 3306
+<br>Sql server is running on port: 3306
+
+## Routes
+<table>
+    <tr>
+        <td>GET</td>
+        <td>/api/book</td>
+        <td>Get all books</td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>/api/book/{bookId}</td>
+        <td>Get a book by its ID</td>
+    </tr>
+    <tr>
+        <td>POST</td>
+        <td>/api/book</td>
+        <td>Create new book</td>
+    </tr>
+    <tr>
+        <td>PUT</td>
+        <td>/api/book/{bookId}</td>
+        <td>Update a book's detail</td>
+    </tr>
+    <tr>
+        <td>DELETE</td>
+        <td>/api/book/{bookId}</td>
+        <td>Delete a book</td>
+    </tr>
+</table>
