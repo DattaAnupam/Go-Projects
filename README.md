@@ -22,6 +22,12 @@ This shows basic CRUD i.e. Create, Read (Get), Update and Delete operation of an
     <li>Set `PATH` variable. You can learn it from <a href="https://www.tutorialspoint.com/adding-mysql-to-windows-path">here</a></li>
 </ol>
 
+Run `go get` to install vendor packages.
+<br>
+Run `go init mod <ModuleName>` to create `.mod` file.
+<br>
+Run `go mod tidy` to build `.sum` file.
+<br>
 #### To Build Book-Management-Crud project
 > go to main directory, inside pkg directory.
 > type "go build".
