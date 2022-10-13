@@ -12,7 +12,7 @@ This shows basic CRUD i.e. Create, Read (Get), Update and Delete operation of an
 <br>**Note**
 <br>Please make required changes for port number and movie id if needed.
 
-#### To Build Book-Store-Crud project
+#### To Build Movie-Management-Crud project
 > type "go build" inside terminal.
 
 #### Error: `go: go.mod file not found in current directory or any parent directory;...`
