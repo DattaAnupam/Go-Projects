@@ -23,3 +23,7 @@ Solution: inside terminal type `go env -w GO111MODULE=auto` (1 -> One, not L in 
 > 2. type `go run main.go`
 
 By default the server runs on port :8080
+
+### **Note**
+The project is buildable but not executable.
+<br>Not able to connect to MySql.
