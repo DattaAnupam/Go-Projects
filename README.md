@@ -23,6 +23,7 @@ type
 > `go get`
 <br>It will bring all the go dependencies used in the project.
 <br>Note: _Althout for this project `/vendor` folder is provided, hence you can igonre the above command_
+> <br>`go init mod <Name_of_module>`
 > <br>`go build`
 
 #### Error: `go: go.mod file not found in current directory or any parent directory;...`
