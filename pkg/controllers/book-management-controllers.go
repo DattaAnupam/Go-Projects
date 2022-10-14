@@ -59,7 +59,7 @@ var GetBookByIdHandler = func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Error while Parsing Book id.")
 	}
 
-	book := services.GetBookById(id)
+	book, _ := services.GetBookById(id)
 
 	// Create response
 	res, _ := json.Marshal(book)
@@ -74,7 +74,50 @@ var GetBookByIdHandler = func(w http.ResponseWriter, r *http.Request) {
 // PUT
 // Update a book detail
 var UpdateBookHandler = func(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("from UpdateBookHandler")
+	book := &models.Book{}
+	// parse reqest body
+	utils.ParseReqBody(r, book)
+
+	// get query parameters from request
+	params := mux.Vars(r)
+
+	// get book id and convert it to int
+	id, err := strconv.ParseInt(params["bookId"], 0, 0)
+
+	// check for error during parsing
+	if err != nil {
+		fmt.Println("Error while Parsing Book id.")
+	}
+
+	// get the book with id from db
+	oldBook, db := services.GetBookById(id)
+
+	// Update book name if given in the input
+	if book.BookName != "" {
+		oldBook.BookName = book.BookName
+	}
+
+	// Update author name if given in the input
+	if book.Author != "" {
+		oldBook.Author = book.Author
+	}
+
+	// Update isbn if given in the input
+	if book.Isbn != "" {
+		oldBook.Isbn = book.Isbn
+	}
+
+	// Save updated details inside db
+	db.Save(&oldBook)
+
+	// Create Response
+	res, _ := json.Marshal(oldBook)
+
+	// Set Header
+	w.Header().Set("Content-Type", "applicaton/json")
+	w.WriteHeader(http.StatusOK)
+
+	w.Write(res)
 }
 
 // DELETE

@@ -32,10 +32,10 @@ func GetAllBooks() []models.Book {
 }
 
 // Get a book by its ID
-func GetBookById(Id int64) *models.Book {
+func GetBookById(Id int64) (*models.Book, *gorm.DB) {
 	var book models.Book
 	db.Where("ID=?", Id).Find(&book)
-	return &book
+	return &book, db
 }
 
 // Delete book
