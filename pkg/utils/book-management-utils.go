@@ -1,9 +1,17 @@
 package utils
 
 import (
-	"fmt"
+	"encoding/json"
+	"io"
+	"net/http"
 )
 
-func TryUtils() {
-	fmt.Println("from pkg/utils/book-management-utils.go")
+// parse request body
+var ParseReqBody = func(r *http.Request, x interface{}) {
+	if reqBody, err := io.ReadAll(r.Body); err == nil {
+		// Create Json from Object
+		if err := json.Unmarshal([]byte(reqBody), x); err != nil {
+			return
+		}
+	}
 }

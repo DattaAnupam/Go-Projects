@@ -1,15 +1,10 @@
 package routes
 
 import (
-	"fmt"
 	"main/pkg/controllers"
 
 	"github.com/gorilla/mux"
 )
-
-func TryFunc() {
-	fmt.Println("from pkg/routes/book-management-routes.go")
-}
 
 var RegisterBookManagementRoutes = func(router *mux.Router) {
 	// Get all books - route
