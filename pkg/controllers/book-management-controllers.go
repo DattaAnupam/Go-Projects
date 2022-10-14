@@ -1,7 +1,9 @@
 package controllers
 
 import (
+	"encoding/json"
 	"fmt"
+	"main/pkg/services"
 	"net/http"
 )
 
@@ -14,8 +16,16 @@ var CreateBookHandler = func(w http.ResponseWriter, r *http.Request) {
 // GET
 // Get all books
 var GetAllBooksHandler = func(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("from GetAllBooksHandler")
+	books := services.GetAllBooks()
 
+	// Create response
+	res, _ := json.Marshal(books)
+
+	// Set Header
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+
+	w.Write(res)
 }
 
 // GET
