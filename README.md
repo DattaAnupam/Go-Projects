@@ -46,27 +46,27 @@ By default the server runs on port :8080
 <table>
     <tr>
         <td>GET</td>
-        <td>/api/book</td>
+        <td>/api/books</td>
         <td>Get all books</td>
     </tr>
     <tr>
         <td>GET</td>
-        <td>/api/book/{bookId}</td>
+        <td>/api/books/{bookId}</td>
         <td>Get a book by its ID</td>
     </tr>
     <tr>
         <td>POST</td>
-        <td>/api/book</td>
+        <td>/api/books</td>
         <td>Create new book</td>
     </tr>
     <tr>
         <td>PUT</td>
-        <td>/api/book/{bookId}</td>
+        <td>/api/books/{bookId}</td>
         <td>Update a book's detail</td>
     </tr>
     <tr>
         <td>DELETE</td>
-        <td>/api/book/{bookId}</td>
+        <td>/api/books/{bookId}</td>
         <td>Delete a book</td>
     </tr>
 </table>
