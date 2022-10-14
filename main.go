@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"main/pkg/config"
 	"main/pkg/routes"
 	"main/pkg/services"
 	"main/pkg/utils"
@@ -13,7 +12,6 @@ import (
 
 func main() {
 	routes.TryFunc()
-	config.TryConfig()
 	utils.TryUtils()
 	services.TryServices()
 
