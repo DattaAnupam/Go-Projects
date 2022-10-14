@@ -24,7 +24,7 @@ This shows basic CRUD i.e. Create, Read (Get), Update and Delete operation of an
 
 Run `go get` to install vendor packages.
 <br>
-Run `go init mod <ModuleName>` to create `.mod` file.
+Run `go mod init <ModuleName>` to create `.mod` file.
 <br>
 Run `go mod tidy` to build `.sum` file.
 <br>
