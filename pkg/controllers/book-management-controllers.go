@@ -80,5 +80,25 @@ var UpdateBookHandler = func(w http.ResponseWriter, r *http.Request) {
 // DELETE
 // Delete a book
 var DeleteBookHandler = func(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("from DeleteBookHandler")
+	// get query parameters from request
+	params := mux.Vars(r)
+
+	// get book id and convert it to int
+	id, err := strconv.ParseInt(params["bookId"], 0, 0)
+
+	// check no error during parsing
+	if err != nil {
+		fmt.Println("Error while Parsing Book id.")
+	}
+
+	book := services.DeleteBook(id)
+
+	// Create Response
+	res, _ := json.Marshal(book)
+
+	// Set Header
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+
+	w.Write(res)
 }
