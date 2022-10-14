@@ -1,11 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"main/pkg/config"
 	"main/pkg/models"
 	"main/pkg/routes"
+	"main/pkg/services"
 	"main/pkg/utils"
 	"net/http"
 
@@ -13,11 +13,11 @@ import (
 )
 
 func main() {
-	fmt.Println("basic structure")
 	routes.TryFunc()
 	models.TryModels()
 	config.TryConfig()
 	utils.TryUtils()
+	services.TryServices()
 
 	// declare new router
 	r := mux.NewRouter()
