@@ -1,17 +1,22 @@
 package services
 
 import (
-	"fmt"
+	"main/pkg/config"
 	"main/pkg/models"
 
 	"gorm.io/gorm"
 )
 
-func TryServices() {
-	fmt.Println("from main/pkg/services/book-management-services.go")
-}
-
 var db *gorm.DB
+
+var Init = func() {
+	// Connect to DB
+	config.Connect()
+	// set the DB
+	db = config.GetDB()
+
+	db.AutoMigrate(&models.Book{})
+}
 
 // Create new book record inside DB
 func CreateBook(b *models.Book) *models.Book {

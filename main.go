@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 	"main/pkg/routes"
-	"main/pkg/services"
 	"main/pkg/utils"
 	"net/http"
 
@@ -13,7 +12,6 @@ import (
 func main() {
 	routes.TryFunc()
 	utils.TryUtils()
-	services.TryServices()
 
 	// declare new router
 	r := mux.NewRouter()
