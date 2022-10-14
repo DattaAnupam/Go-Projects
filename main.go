@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"main/pkg/routes"
+	"main/pkg/services"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -11,6 +12,9 @@ import (
 func main() {
 	// declare new router
 	r := mux.NewRouter()
+
+	services.Init()
+
 	// Handle routing
 	routes.RegisterBookManagementRoutes(r)
 
