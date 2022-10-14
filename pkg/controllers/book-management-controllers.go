@@ -3,14 +3,33 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
+	"main/pkg/models"
 	"main/pkg/services"
+	"main/pkg/utils"
 	"net/http"
+	"strconv"
+
+	"github.com/gorilla/mux"
 )
 
 // POST
 // Create a book
 var CreateBookHandler = func(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("from CreateBookHandler")
+	book := &models.Book{}
+
+	// Parse new book request
+	utils.ParseReqBody(r, book)
+
+	createBook := services.CreateBook(book)
+
+	// Create Response
+	res, _ := json.Marshal(createBook)
+
+	// Set Header
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+
+	w.Write(res)
 }
 
 // GET
@@ -31,7 +50,25 @@ var GetAllBooksHandler = func(w http.ResponseWriter, r *http.Request) {
 // GET
 // Get a book by its Id
 var GetBookByIdHandler = func(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("from GetBookByIdHandler")
+	// get query parameters from request
+	params := mux.Vars(r)
+
+	// Get book id
+	id, err := strconv.ParseInt(params["bookId"], 0, 0)
+	if err != nil {
+		fmt.Println("Error while Parsing Book id.")
+	}
+
+	book := services.GetBookById(id)
+
+	// Create response
+	res, _ := json.Marshal(book)
+
+	// Set Header
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusFound)
+
+	w.Write(res)
 }
 
 // PUT
