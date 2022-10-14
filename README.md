@@ -45,28 +45,39 @@ By default the server runs on port :8080
 ## Routes
 <table>
     <tr>
+        <th>Method</th>
+        <th>Endpoint</th>
+        <th>Detail</th>
+        <th>url for localhost 8080</th>
+    </tr>
+    <tr>
         <td>GET</td>
         <td>/api/books</td>
         <td>Get all books</td>
+        <td>localhost:8080/api/books</td>
     </tr>
     <tr>
         <td>GET</td>
         <td>/api/books/{bookId}</td>
         <td>Get a book by its ID</td>
+        <td>localhost:8080/api/books/1</td>
     </tr>
     <tr>
         <td>POST</td>
         <td>/api/books</td>
         <td>Create new book</td>
+        <td>localhost:8080/api/books</td>
     </tr>
     <tr>
         <td>PUT</td>
         <td>/api/books/{bookId}</td>
         <td>Update a book's detail</td>
+        <td>localhost:8080/api/books/1</td>
     </tr>
     <tr>
         <td>DELETE</td>
         <td>/api/books/{bookId}</td>
         <td>Delete a book</td>
+        <td>localhost:8080/api/books/1</td>
     </tr>
 </table>
