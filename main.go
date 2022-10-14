@@ -6,6 +6,7 @@ import (
 	"main/pkg/controllers"
 	"main/pkg/models"
 	"main/pkg/routes"
+	"main/pkg/utils"
 )
 
 func main() {
@@ -14,4 +15,5 @@ func main() {
 	controllers.TryControllers()
 	models.TryModels()
 	config.TryConfig()
+	utils.TryUtils()
 }
