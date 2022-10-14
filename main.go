@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"main/pkg/config"
 	"main/pkg/controllers"
 	"main/pkg/models"
 	"main/pkg/routes"
@@ -12,4 +13,5 @@ func main() {
 	routes.TryFunc()
 	controllers.TryControllers()
 	models.TryModels()
+	config.TryConfig()
 }
