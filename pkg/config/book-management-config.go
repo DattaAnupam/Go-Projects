@@ -7,9 +7,12 @@ import (
 
 var db *gorm.DB
 
-// Connect to MySql DB
-// Database Name: mytestdb
-// Username: root
+/*
+Connect to MySql DB
+
+Database Name: mytestdb
+Username: root
+*/
 var Connect = func() {
 	// dsn = data source name
 	dsn := "root:MyPass123!mYsql@tcp(127.0.0.1:3306)/mytestdb?charset=utf8mb4&parseTime=True&loc=Local"
@@ -19,4 +22,9 @@ var Connect = func() {
 	}
 
 	db = d
+}
+
+// return db
+var GetDB = func() *gorm.DB {
+	return db
 }
