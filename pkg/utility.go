@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-type DomainModel struct {
+type domainModel struct {
 	Domain      string
 	HasMx       bool
 	HasSPF      bool
@@ -22,7 +22,7 @@ func VerifyEmailDomain() {
 	scanner := bufio.NewScanner(os.Stdin)
 
 	for scanner.Scan() {
-		CheckDomain(scanner)
+		checkDomain(scanner)
 		fmt.Println()
 	}
 
@@ -31,8 +31,9 @@ func VerifyEmailDomain() {
 	}
 }
 
-func CheckDomain(scanner *bufio.Scanner) {
-	var dmod DomainModel
+// Verify input domain
+func checkDomain(scanner *bufio.Scanner) {
+	var dmod domainModel
 
 	// Take input
 	dmod.Domain = scanner.Text()
@@ -54,13 +55,8 @@ func CheckDomain(scanner *bufio.Scanner) {
 		log.Printf("Error: %v\n", err)
 	}
 
-	for _, txtRecord := range txtRecords {
-		if strings.HasPrefix(txtRecord, "v=spf1") {
-			dmod.HasSPF = true
-			dmod.SpfRecord = txtRecord
-			break
-		}
-	}
+	// Get and Set Spf value
+	getSpf(txtRecords, &dmod)
 
 	// Check for DmarcRecord
 	dmarcRecords, err := net.LookupTXT("_dmarc." + dmod.Domain)
@@ -68,6 +64,26 @@ func CheckDomain(scanner *bufio.Scanner) {
 		log.Printf("Error: %v\n", err)
 	}
 
+	// Get and set Dmarc value
+	getDmarc(dmarcRecords, &dmod)
+
+	// Print Received data
+	dmod.showResult()
+}
+
+// Set spf value
+func getSpf(txtRecords []string, dmod *domainModel) {
+	for _, txtRecord := range txtRecords {
+		if strings.HasPrefix(txtRecord, "v=spf1") {
+			dmod.HasSPF = true
+			dmod.SpfRecord = txtRecord
+			break
+		}
+	}
+}
+
+// Set Dmarc value
+func getDmarc(dmarcRecords []string, dmod *domainModel) {
 	for _, record := range dmarcRecords {
 		if strings.HasPrefix(record, "v=DMARC1") {
 			dmod.HasDMARC = true
@@ -75,12 +91,10 @@ func CheckDomain(scanner *bufio.Scanner) {
 			break
 		}
 	}
-
-	// Print Received data
-	dmod.ShowResult()
 }
 
-func (d DomainModel) ShowResult() {
+// Show Received information
+func (d domainModel) showResult() {
 	fmt.Printf("Domain: %s\n", d.Domain)
 	fmt.Printf("Has Mx: %v\n", d.HasMx)
 	fmt.Printf("Has Spf: %v\n", d.HasSPF)
