@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	fmt.Println("Init Go-Projects")
+	fmt.Println("Initial Project Structure for Email Verifier")
 }
