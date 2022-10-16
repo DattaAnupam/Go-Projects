@@ -1,5 +1,4 @@
-# Go-Projects
-This Repo contains small projects on go language to touch various aspects of Go Language
+# Go-Server
 
 #### To Build Go-SERVER project
 > type "go build" inside terminal.
