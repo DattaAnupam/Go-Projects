@@ -1,4 +1,4 @@
-## GO-WITH-MYSQL
+# GO-WITH-MYSQL
 
 ## About
 This shows the basic working process with MySql and Go.
