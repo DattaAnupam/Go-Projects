@@ -1,6 +1,3 @@
-# Go-Projects
-This Repo contains small projects on go language to touch various aspects of Go Language
-
 ## Book-Management-CRUD
 
 ## About
