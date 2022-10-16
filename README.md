@@ -1,7 +1,5 @@
-# Go-Projects
-This Repo contains small projects on go language to touch various aspects of Go Language
-
 ## About
+
 This shows basic CRUD i.e. Create, Read (Get), Update and Delete operation of an Rest Api.
 <br>Local structure has been used as storage.
 <br>No Db has been used.
