@@ -2,8 +2,9 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
+	"main/pkg/routes"
+	"main/pkg/services"
 	"math/rand"
 	"net/http"
 	"strconv"
@@ -118,22 +119,14 @@ func deleteBookHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	fmt.Println("book management with CRUD operation")
-
-	// Init Router
+	// declare new router
 	r := mux.NewRouter()
 
-	// Mock Data
-	books = append(books, Book{ID: "1", Isbn: "123456", Title: "Book One", Author: &Author{Firstname: "Anupam", Lastname: "Datta"}})
-	books = append(books, Book{ID: "2", Isbn: "123457", Title: "Book Two", Author: &Author{Firstname: "Bapi", Lastname: "Datta"}})
+	services.Init()
 
-	// Route Handlers / Endpoints
-	r.HandleFunc("/api/books", getBooksHandler).Methods("GET")
-	r.HandleFunc("/api/books/{id}", getBookHandler).Methods("GET")
-	r.HandleFunc("/api/books", createBookHandler).Methods("POST")
-	r.HandleFunc("/api/books/{id}", updateBookHandler).Methods("PUT")
-	r.HandleFunc("/api/books/{id}", deleteBookHandler).Methods("DELETE")
+	// Handle routing
+	routes.RegisterBookManagementRoutes(r)
 
-	// Init Server
+	http.Handle("/", r)
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
