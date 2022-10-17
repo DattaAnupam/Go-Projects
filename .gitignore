@@ -21,9 +21,6 @@ bin/
 # Unignore all `.exe` in `bin` dir
 !*/bin/*.exe
 
-# Ignore vendor folder
-*.vendor
-
-# Ignore mod & sum file
+# Ignore all mod & sum files
 *.mod
 *.sum
