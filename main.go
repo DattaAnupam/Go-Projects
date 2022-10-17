@@ -2,9 +2,8 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
-	"main/pkg/routes"
-	"main/pkg/services"
 	"math/rand"
 	"net/http"
 	"strconv"
@@ -12,121 +11,132 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// Book Struct (Model)
-type Book struct {
-	ID     string  `json:"id"`
-	Isbn   string  `json:"isbn"`
-	Title  string  `json:"title"`
-	Author *Author `json:"author"`
+// Movie Model
+type Movie struct {
+	ID       string    `json:"id"`
+	Isbn     string    `json:"isbn"`
+	Title    string    `json:"title"`
+	Director *Director `json:"director"`
 }
 
-// Author Struct (Model)
-type Author struct {
+// Director Model
+type Director struct {
 	Firstname string `json:"firstname"`
 	Lastname  string `json:"lastname"`
 }
 
-// Init books var as a slice Book struct
-var books []Book
+// Slice of movies, dummy for db
+var movies []Movie
 
 // GET
-// Get all books
-func getBooksHandler(w http.ResponseWriter, r *http.Request) {
+// Get all movies
+func getMoviesHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	json.NewEncoder(w).Encode(books)
+	json.NewEncoder(w).Encode(movies)
 }
 
 // GET
-// Get a book by its Id
-func getBookHandler(w http.ResponseWriter, r *http.Request) {
+// Get a movie by id
+func getMovieHandler(w http.ResponseWriter, r *http.Request) {
+	// movie found status flag
+	foundMovie := false
+
 	w.Header().Set("Content-Type", "application/json")
 
-	// Get params
 	params := mux.Vars(r)
 
-	// Loop through books and find with id
-	for _, item := range books {
-		if item.ID == params["id"] {
-			json.NewEncoder(w).Encode(item)
-			return
+	for _, movie := range movies {
+		if movie.ID == params["id"] {
+			json.NewEncoder(w).Encode(movie)
+			foundMovie = true
+			break
 		}
 	}
-	// Return Empty book if not found
-	json.NewEncoder(w).Encode(&Book{})
+
+	// If not found return empty data
+	if !foundMovie {
+		json.NewEncoder(w).Encode(Movie{})
+	}
 }
 
 // POST
-// Create a book
-func createBookHandler(w http.ResponseWriter, r *http.Request) {
+// Create a movie
+func createMovieHandler(w http.ResponseWriter, r *http.Request) {
+	var movie Movie
+
 	w.Header().Set("Content-Type", "application/json")
 
-	var book Book
+	// Decode request
+	_ = json.NewDecoder(r.Body).Decode(&movie)
 
-	// Decode request json body
-	_ = json.NewDecoder(r.Body).Decode(&book)
-	// Assign random Id to the new book
-	book.ID = strconv.Itoa(rand.Intn(1000000))
-	// Add new book to the books slice
-	books = append(books, book)
+	// Set Id of new movie
+	movie.ID = strconv.Itoa(rand.Intn(10000))
 
-	// return newly create book
-	json.NewEncoder(w).Encode(book)
+	// Add new movie to the collection
+	movies = append(movies, movie)
+
+	// Return newly created movie
+	json.NewEncoder(w).Encode(movie)
 }
 
 // PUT
-// Update a book by its Id
-func updateBookHandler(w http.ResponseWriter, r *http.Request) {
+// Update a movie by id
+func updateMovieHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	var book Book
-
-	// Decode request json body
-	_ = json.NewDecoder(r.Body).Decode(&book)
 	params := mux.Vars(r)
 
-	for index, item := range books {
-		if item.ID == params["id"] {
-			// remove the book from the list
-			books = append(books[:index], books[index+1:]...)
-			// add new book
-			book.ID = params["id"]
-			books = append(books, book)
+	var newMovie Movie
+
+	_ = json.NewDecoder(r.Body).Decode(&newMovie)
+
+	for index, movie := range movies {
+		if movie.ID == params["id"] {
+			newMovie.ID = params["id"]
+			movies[index] = newMovie
+			// Return updated movie
+			json.NewEncoder(w).Encode(newMovie)
+
 			break
 		}
 	}
-
-	// return newly create book
-	json.NewEncoder(w).Encode(book)
 }
 
 // DELETE
-// Delete a book by its Id
-func deleteBookHandler(w http.ResponseWriter, r *http.Request) {
+// Delete a movie by id
+func deleteMovieHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	params := mux.Vars(r)
 
-	for index, item := range books {
-		if item.ID == params["id"] {
-			books = append(books[:index], books[index+1:]...)
+	for index, movie := range movies {
+		if movie.ID == params["id"] {
+			movies = append(movies[:index], movies[index+1:]...)
 			break
 		}
 	}
 
-	// return all the books
-	json.NewEncoder(w).Encode(books)
+	// return rest of the movies
+	json.NewEncoder(w).Encode(movies)
 }
 
 func main() {
-	// declare new router
+	// Create new Router
 	r := mux.NewRouter()
 
-	services.Init()
+	// Init movies
+	movies = append(movies, Movie{ID: "1", Isbn: "123456", Title: "First Movie", Director: &Director{Firstname: "Anupam", Lastname: "Datta"}})
+	movies = append(movies, Movie{ID: "2", Isbn: "345678", Title: "Second Movie", Director: &Director{Firstname: "Second", Lastname: "Director"}})
 
-	// Handle routing
-	routes.RegisterBookManagementRoutes(r)
+	// Create Routes and Handlers
+	r.HandleFunc("/api/movies", getMoviesHandler).Methods("GET")
+	r.HandleFunc("/api/movies/{id}", getMovieHandler).Methods("GET")
+	r.HandleFunc("/api/movies", createMovieHandler).Methods("POST")
+	r.HandleFunc("/api/movies/{id}", updateMovieHandler).Methods("PUT")
+	r.HandleFunc("/api/movies/{id}", deleteMovieHandler).Methods("DELETE")
 
-	http.Handle("/", r)
+	// Initiate and Start Server
+	fmt.Println("Starting server at port 8080")
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
