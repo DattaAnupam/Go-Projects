@@ -1,41 +1,29 @@
-# GO-WITH-MYSQL
+## EMAIL-VERIFIER
+<hr>
 
 ## About
-This shows the basic working process with MySql and Go.
-<br>MySql Db has been used.
-<br>Db name: **mytestdb**
-<br>table name: **table1**
-<br>**Note**
-<br>Please make required changes for `root password` of MySql inside `main.go`.
 
-## Requirements
+This is simple email domain verifier program. Which checks the MX, SPF and DMARC records.
+> <a href="https://www.cloudflare.com/learning/dns/dns-records/dns-mx-record/">learn</a> about MX 
+<br><a href="https://kinsta.com/knowledgebase/spf-record/">learn</a> about SPF
+<br><a href="https://www.cloudflare.com/learning/dns/dns-records/dns-dmarc-record/">learn</a> about DMARC
+
+> Only <b>VerifyEmailDomain()</b> function is exposed, rest are kept private to show different types of access level in GO.
+
+> All packages that are used, are inbuild of GO.
+
+> Common naming conventions are followed for creating the packages.
+
+## Build and Run
 <ol>
-    <li>MySql should be installed. You can download it from <a href="https://dev.mysql.com/downloads/installer/">here</a> and install it.</li>
-    <li>Keep Root Password handy. You will get it during installation.</li>
-    <li>Set `PATH` variable. You can learn it from <a href="https://www.tutorialspoint.com/adding-mysql-to-windows-path">here</a></li>
+    <li>type <i>go mod init github.com/anupam/email-verifier</i>. It will create the .mod file.</li>
+    <li>type <i>go build</i>. It will create .exe file.</li>
+    <li>type <i>go run main.go</i> It will run the code. For this case <i></i> will do the work.
+    (OR) type <i>./email-verifier.exe</i>.
+    (OR) double click on the .exe file.
 </ol>
 
-#### To Build GO-WITH-MYSQL project
-type 
-> `go get`
-<br>It will bring all the go dependencies used in the project.
-<br>Note: _Althout for this project `/vendor` folder is provided, hence you can igonre the above command_
-> <br>`go init mod <Name_of_module>`
-> <br>`go build`
+## Note
+> You can change the name of the .mod file, by entering your desired name after `...init` in <i>Step 1</i>
 
-#### Error: `go: go.mod file not found in current directory or any parent directory;...`
-Solution: inside terminal type `go env -w GO111MODULE=auto` (1 -> One, not L in small)
-
-#### To Run 
-> 1. Double click on .exe file
-<br> type
-> 2. `go run main.go`
-
-#### To Build + Run
-type
-> `go build && ./go-with-sql.exe`
-<br>Note
-<br>name_of_the_.exe = name_of_the_module
-<br>please make changes accordingly.
-
-By default the server runs on port :8080
+> Enter into the correct directory before running the .exe file from terminal.
