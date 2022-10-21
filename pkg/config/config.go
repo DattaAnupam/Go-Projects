@@ -1,6 +1,10 @@
 package config
 
 import (
+	"log"
+
+	"github.com/anupam/crm-with-sql-fiber/pkg/model"
+	"github.com/gofiber/fiber/v2"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -22,4 +26,17 @@ var Connect = func() {
 // Get database ref
 func GetDB() *gorm.DB {
 	return DBConn
+}
+
+// Initiate Database
+var InitDB = func() {
+	// connect to DB
+	Connect()
+
+	DBConn.AutoMigrate(&model.Lead{})
+}
+
+// Initiate Server
+var InitServer = func(app *fiber.App) {
+	log.Fatal(app.Listen(":8080"))
 }
