@@ -4,19 +4,12 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/anupam/crm-with-go-fiber-mysql/pkg/model"
+
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
-
-// model
-type Lead struct {
-	gorm.Model
-	Name    string `json:"name"`
-	Company string `json:"company"`
-	Email   string `json:"email"`
-	Phone   int    `json:"phone"`
-}
 
 func main() {
 	fmt.Println("initial code")
@@ -28,13 +21,13 @@ func main() {
 	if err != nil {
 		panic(err.Error())
 	}
-	db.AutoMigrate(&Lead{})
+	db.AutoMigrate(&model.Lead{})
 
 	// routes
 
 	// Get all leads
 	app.Get("/api/lead", func(c *fiber.Ctx) error {
-		var leads []Lead
+		var leads []model.Lead
 		db.Find(&leads)
 
 		return c.JSON(leads)
@@ -43,14 +36,14 @@ func main() {
 	// Get leads by Id
 	app.Get("/api/lead/:id", func(c *fiber.Ctx) error {
 		id := c.Params("id")
-		var lead Lead
+		var lead model.Lead
 		db.Where("ID=?", id).Find(&lead)
 		return c.JSON(lead)
 	})
 
 	// Create new lead
 	app.Post("/api/lead", func(c *fiber.Ctx) error {
-		lead := new(Lead)
+		lead := new(model.Lead)
 		if err := c.BodyParser(lead); err != nil {
 			return c.Status(503).SendString(err.Error())
 		}
@@ -62,8 +55,8 @@ func main() {
 	// Delete lead by id
 	app.Delete("/api/lead/:id", func(c *fiber.Ctx) error {
 		id := c.Params("id")
-		var lead Lead
-		var leads []Lead
+		var lead model.Lead
+		var leads []model.Lead
 		db.Where("ID=?", id).Delete(&lead)
 		db.Find(&leads)
 		return c.JSON(leads)
