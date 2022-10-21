@@ -7,7 +7,7 @@ import (
 
 var SetupRoute = func(app *fiber.App) {
 	app.Get("/api/lead", controllers.GetLeads)
-	app.Get("/api/lead/:id")
-	app.Post("/api/lead")
-	app.Delete("/api/lead/:id")
+	app.Get("/api/lead/:id", controllers.GetLead)
+	app.Post("/api/lead", controllers.CreateLead)
+	app.Delete("/api/lead/:id", controllers.DeleteLead)
 }

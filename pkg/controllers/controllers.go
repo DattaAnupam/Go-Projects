@@ -7,16 +7,16 @@ import (
 )
 
 // Get all leads
-func GetLeads(c *fiber.Ctx) {
+func GetLeads(c *fiber.Ctx) error {
 	db := config.GetDB()
 	var leads []model.Lead
 
 	db.Find(&leads)
-	c.JSON(leads)
+	return c.JSON(leads)
 }
 
 // Get a single lead
-var GetLead = func(c *fiber.Ctx) {
+var GetLead = func(c *fiber.Ctx) error {
 	// Get Id
 	id := c.Params("id")
 	db := config.GetDB()
@@ -25,24 +25,23 @@ var GetLead = func(c *fiber.Ctx) {
 	db.Find(&lead, id)
 	// db.Where("ID=?", id).Find(&lead)
 
-	c.JSON(lead)
+	return c.JSON(lead)
 }
 
 // Create a new Lead
-var CreateLead = func(c *fiber.Ctx) {
+var CreateLead = func(c *fiber.Ctx) error {
 	db := config.GetDB()
 	lead := new(model.Lead)
 	if err := c.BodyParser(lead); err != nil {
-		c.Status(503).SendString(err.Error())
-		return
+		return c.Status(503).SendString(err.Error())
 	}
 
 	db.Create(&lead)
-	c.JSON(lead)
+	return c.JSON(lead)
 }
 
 // Delete an existing Lead
-var DeleteLead = func(c *fiber.Ctx) {
+var DeleteLead = func(c *fiber.Ctx) error {
 	db := config.GetDB()
 	id := c.Params("id")
 
@@ -50,8 +49,8 @@ var DeleteLead = func(c *fiber.Ctx) {
 	db.First(&lead, id)
 
 	if lead.Name == "" {
-		c.Status(500).SendString("No lead found with ID")
+		return c.Status(500).SendString("No lead found with ID")
 	}
 
-	c.JSON("Id deleted successfully")
+	return c.JSON("Id deleted successfully")
 }
