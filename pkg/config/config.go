@@ -20,6 +20,6 @@ var Connect = func() {
 }
 
 // Get database ref
-var GetDB = func() *gorm.DB {
+func GetDB() *gorm.DB {
 	return DBConn
 }
