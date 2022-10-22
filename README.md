@@ -18,6 +18,7 @@ Solution: inside terminal type `go env -w GO111MODULE=auto` (1 -> One, not L in 
     <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/movie-management-crud" target=_blank>MOVIE-MANAGEMENT-CRUD</a></li>
     <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/book-management-crud" target=_blank>BOOK-MANAGEMENT-CRUD</a></li>
     <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/go-with-mysql" target=_blank>GO-WITH-MYSQL</a></li>
-    <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/email-verifier" target=_blank>EMAIL-VERIFIER</a></li>
+    <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/email-verifier" target=_blank>CRM With Go-Fiber and MySql</a></li>
+    <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/crm-with-go-fiber-mysql" target=_blank></a></li>
 </ol>
 
