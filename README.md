@@ -45,6 +45,8 @@ After cloning the repo
 > By default the server runs on port :8080
 <br>MySql server is running on port: 3306
 
+> Commands may differ depending on OS. Above are for Windows OS.
+
 ## Routes
 <table>
     <tr>
