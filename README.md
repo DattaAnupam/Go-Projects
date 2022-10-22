@@ -21,3 +21,5 @@ Solution: inside terminal type `go env -w GO111MODULE=auto` (1 -> One, not L in 
 > 2. type `go run main.go`
 
 By default the server runs on port :8080
+
+<a href="https://github.com/DattaAnupam/Go-Projects">**Back to master branch**</a>
