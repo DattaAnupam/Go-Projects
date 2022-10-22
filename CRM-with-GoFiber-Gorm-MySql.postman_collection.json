@@ -1,0 +1,167 @@
+{
+	"info": {
+		"_postman_id": "6b22e0f9-d751-493b-a155-ae5b08f1d6fa",
+		"name": "CRM-with-GoFiber-Gorm-MySql",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13131700"
+	},
+	"item": [
+		{
+			"name": "Local-GetAllLeads",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{{[localurl}}}}",
+					"host": [
+						"{{{[localurl}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local-GetLeadByID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{{[localurl}}}}/1",
+					"host": [
+						"{{{[localurl}}}}"
+					],
+					"path": [
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local-CreateLeadByID",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"dummy_name\",\r\n    \"company\": \"dummy_company\",\r\n    \"email\":\"dummy_email@email.com\",\r\n    \"phone\":12352\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{{[localurl}}}}",
+					"host": [
+						"{{{[localurl}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local-UpdateLeadByID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"updated_name\",\r\n    \"company\": \"updated_company\",\r\n    \"email\":\"update_email@email.com\",\r\n    \"phone\":12352\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{{[localurl}}}}/1",
+					"host": [
+						"{{{[localurl}}}}"
+					],
+					"path": [
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local-DeleteLeadByID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{{[localurl}}}}/1",
+					"host": [
+						"{{{[localurl}}}}"
+					],
+					"path": [
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "{[localurl}}",
+			"value": "http://localhost:8080/api/lead/",
+			"type": "string"
+		}
+	]
+}
