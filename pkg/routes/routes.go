@@ -6,7 +6,7 @@ import (
 )
 
 var SetupRoutes = func(app *fiber.App) {
-	// setup controller
+	// setup database
 	controllers.SetupDb()
 
 	// Get all leads
@@ -17,6 +17,9 @@ var SetupRoutes = func(app *fiber.App) {
 
 	// Create new lead
 	app.Post("/api/lead", controllers.CreateLead)
+
+	// Update lead
+	app.Put("/api/lead/:id", controllers.UpdateLead)
 
 	// Delete lead by id
 	app.Delete("/api/lead/:id", controllers.DeleteLeadByID)

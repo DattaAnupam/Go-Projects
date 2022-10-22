@@ -16,7 +16,7 @@ var SetupDb = func() {
 	db = config.InitDB()
 }
 
-// Controller Functions
+// Get all leads
 var GetAllLeads = func(c *fiber.Ctx) error {
 	var leads []model.Lead
 	db.Find(&leads)
@@ -24,6 +24,7 @@ var GetAllLeads = func(c *fiber.Ctx) error {
 	return c.JSON(leads)
 }
 
+// Get a single lead by ID
 var GetLeadByID = func(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var lead model.Lead
@@ -31,6 +32,7 @@ var GetLeadByID = func(c *fiber.Ctx) error {
 	return c.JSON(lead)
 }
 
+// Create a New Lead
 var CreateLead = func(c *fiber.Ctx) error {
 	lead := new(model.Lead)
 	if err := c.BodyParser(lead); err != nil {
@@ -41,6 +43,24 @@ var CreateLead = func(c *fiber.Ctx) error {
 	return c.JSON(lead)
 }
 
+// Update a Lead
+var UpdateLead = func(c *fiber.Ctx) error {
+	// Save Incoming Request Info
+	newLeadInfo := new(model.Lead)
+	if err := c.BodyParser(newLeadInfo); err != nil {
+		return c.Status(503).SendString(err.Error())
+	}
+
+	// Find Particular Lead by Id
+	id := c.Params("ID")
+	var oldLead model.Lead
+	db.Model(model.Lead{}).Where("ID=?", id).Updates(newLeadInfo)
+	db.Where("ID=?", id).Find(&oldLead)
+
+	return c.JSON(oldLead)
+}
+
+// Delete a Lead by ID
 var DeleteLeadByID = func(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var lead model.Lead
