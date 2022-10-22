@@ -6,6 +6,9 @@ import (
 )
 
 var SetupRoutes = func(app *fiber.App) {
+	// setup controller
+	controllers.SetupDb()
+
 	// Get all leads
 	app.Get("/api/lead", controllers.GetAllLeads)
 
