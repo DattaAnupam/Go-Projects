@@ -21,4 +21,3 @@ Solution: inside terminal type `go env -w GO111MODULE=auto` (1 -> One, not L in 
     <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/email-verifier" target=_blank>EMAIL-VERIFIER</a></li>
     <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/email-verifier" target=_blank>CRM With Go-Fiber and MySql</a></li>
 </ol>
-
