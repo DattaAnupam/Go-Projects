@@ -27,3 +27,5 @@ This is simple email domain verifier program. Which checks the MX, SPF and DMARC
 > You can change the name of the .mod file, by entering your desired name after `...init` in <i>Step 1</i>
 
 > Enter into the correct directory before running the .exe file from terminal.
+
+<a href="https://github.com/DattaAnupam/Go-Projects">**Back to master branch**</a>
