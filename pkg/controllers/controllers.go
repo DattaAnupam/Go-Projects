@@ -5,13 +5,11 @@ import (
 	"github.com/anupam/crm-with-go-fiber-mysql/pkg/model"
 
 	"github.com/gofiber/fiber/v2"
-	// "gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 var db *gorm.DB
 
-// var db = InitDB()
 var SetupDb = func() {
 	db = config.InitDB()
 }
