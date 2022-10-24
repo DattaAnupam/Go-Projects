@@ -22,6 +22,7 @@ var mg MongoInstance
 const dbName = "fiber-hrms"
 
 // const mongoURI = "mongodb://localhost:27017" + dbName
+// Uri for my mongo atlas cluster
 const mongoURI = "mongodb+srv://dummyUser:Yma6hMB7DmuvUjcN@cluster0.hdt7puu.mongodb.net/test"
 
 type Employee struct {
@@ -31,6 +32,7 @@ type Employee struct {
 	Age    float64 `json:"age"`
 }
 
+// Connect to Mongo DB
 func Connect() error {
 	client, err := mongo.NewClient(options.Client().ApplyURI(mongoURI))
 
@@ -60,6 +62,7 @@ func main() {
 	}
 	app := fiber.New()
 
+	// Get all employees
 	app.Get("/employee", func(c *fiber.Ctx) error {
 		query := bson.D{{}}
 		cursor, err := mg.Db.Collection("employees").Find(c.Context(), query)
@@ -75,6 +78,7 @@ func main() {
 		return c.JSON(employees)
 	})
 
+	// Get employee by ID
 	app.Get("/employee/:id", func(c *fiber.Ctx) error {
 		id, err := primitive.ObjectIDFromHex(c.Params("id"))
 		if err != nil {
@@ -94,6 +98,7 @@ func main() {
 		return c.JSON(employee)
 	})
 
+	// Create new Employee
 	app.Post("/employee", func(c *fiber.Ctx) error {
 		collection := mg.Db.Collection("employees")
 		employee := new(Employee)
@@ -118,6 +123,7 @@ func main() {
 		return c.Status(201).JSON(createdEmployee)
 	})
 
+	// Update an existing employee
 	app.Put("/employee/:id", func(c *fiber.Ctx) error {
 		id := c.Params("id")
 		employeeID, err := primitive.ObjectIDFromHex(id)
@@ -156,6 +162,7 @@ func main() {
 		return c.Status(200).JSON(employee)
 	})
 
+	// Delete employee by ID
 	app.Delete("/employee/:id", func(c *fiber.Ctx) error {
 		id, err := primitive.ObjectIDFromHex(c.Params("id"))
 
@@ -177,5 +184,6 @@ func main() {
 		return c.Status(200).JSON("record deleted")
 	})
 
+	// Run the server on port 8080
 	log.Fatal(app.Listen(":8080"))
 }
