@@ -190,19 +190,19 @@ func main() {
 	app := fiber.New()
 
 	// Get all employees
-	app.Get("/employee", GetAllEmployee)
+	app.Get("/api/employee", GetAllEmployee)
 
 	// Get employee by ID
-	app.Get("/employee/:id", GetEmployeeByID)
+	app.Get("/api/employee/:id", GetEmployeeByID)
 
 	// Create new Employee
-	app.Post("/employee", CreateEmployee)
+	app.Post("/api/employee", CreateEmployee)
 
 	// Update an existing employee
-	app.Put("/employee/:id", UpdateEmployee)
+	app.Put("/api/employee/:id", UpdateEmployee)
 
 	// Delete employee by ID
-	app.Delete("/employee/:id", DeleteEmployeeByID)
+	app.Delete("/api/employee/:id", DeleteEmployeeByID)
 
 	// Run the server on port 8080
 	log.Fatal(app.Listen(":8080"))
