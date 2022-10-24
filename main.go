@@ -75,6 +75,25 @@ func main() {
 		return c.JSON(employees)
 	})
 
+	app.Get("/employee/:id", func(c *fiber.Ctx) error {
+		id, err := primitive.ObjectIDFromHex(c.Params("id"))
+		if err != nil {
+			return c.SendStatus(400)
+		}
+
+		employee := new(Employee)
+
+		query := bson.D{{Key: "_id", Value: id}}
+
+		cursor := mg.Db.Collection("employees").FindOne(c.Context(), query)
+
+		if err := cursor.Decode(employee); err != nil {
+			return c.Status(500).SendString(err.Error())
+		}
+
+		return c.JSON(employee)
+	})
+
 	app.Post("/employee", func(c *fiber.Ctx) error {
 		collection := mg.Db.Collection("employees")
 		employee := new(Employee)
