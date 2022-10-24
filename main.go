@@ -12,6 +12,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+// Model: Instance for Mongo
 type MongoInstance struct {
 	Client *mongo.Client
 	Db     *mongo.Database
@@ -19,12 +20,14 @@ type MongoInstance struct {
 
 var mg MongoInstance
 
+// Name of the DB
 const dbName = "fiber-hrms"
 
 // const mongoURI = "mongodb://localhost:27017" + dbName
-// Uri for my mongo atlas cluster
+// Uri for (my) mongo atlas cluster
 const mongoURI = "mongodb+srv://dummyUser:Yma6hMB7DmuvUjcN@cluster0.hdt7puu.mongodb.net/test"
 
+// Model: Employee
 type Employee struct {
 	ID     string  `json:"id,omitempty" bson:"_id,omitempty"`
 	Name   string  `json:"name"`
@@ -32,7 +35,7 @@ type Employee struct {
 	Age    float64 `json:"age"`
 }
 
-// Connect to Mongo DB
+// Configure: Connect to Mongo DB
 func Connect() error {
 	client, err := mongo.NewClient(options.Client().ApplyURI(mongoURI))
 
@@ -57,7 +60,7 @@ func Connect() error {
 }
 
 // GET
-// Get all Employees
+// Handler: Get all Employees
 var GetAllEmployee = func(c *fiber.Ctx) error {
 	query := bson.D{{}}
 	cursor, err := mg.Db.Collection("employees").Find(c.Context(), query)
@@ -74,7 +77,7 @@ var GetAllEmployee = func(c *fiber.Ctx) error {
 }
 
 // GET
-// Get Employee by ID
+// Handler: Get Employee by ID
 var GetEmployeeByID = func(c *fiber.Ctx) error {
 	id, err := primitive.ObjectIDFromHex(c.Params("id"))
 	if err != nil {
@@ -95,7 +98,7 @@ var GetEmployeeByID = func(c *fiber.Ctx) error {
 }
 
 // POST
-// Create a new Employee
+// Handler: Create a new Employee
 var CreateEmployee = func(c *fiber.Ctx) error {
 	collection := mg.Db.Collection("employees")
 	employee := new(Employee)
@@ -121,7 +124,7 @@ var CreateEmployee = func(c *fiber.Ctx) error {
 }
 
 // PUT
-// Update an Existing Employee
+// Handler: Update an Existing Employee
 var UpdateEmployee = func(c *fiber.Ctx) error {
 	id := c.Params("id")
 	employeeID, err := primitive.ObjectIDFromHex(id)
@@ -161,7 +164,7 @@ var UpdateEmployee = func(c *fiber.Ctx) error {
 }
 
 // DELETE
-// Delete an Employee by ID
+// Handler: Delete an Employee by ID
 var DeleteEmployeeByID = func(c *fiber.Ctx) error {
 	id, err := primitive.ObjectIDFromHex(c.Params("id"))
 
@@ -184,24 +187,26 @@ var DeleteEmployeeByID = func(c *fiber.Ctx) error {
 }
 
 func main() {
+	// Configure: Connection to DB
 	if err := Connect(); err != nil {
 		log.Fatal(err.Error())
 	}
+
 	app := fiber.New()
 
-	// Get all employees
+	// Route: Get all employees
 	app.Get("/api/employee", GetAllEmployee)
 
-	// Get employee by ID
+	// Route: Get employee by ID
 	app.Get("/api/employee/:id", GetEmployeeByID)
 
-	// Create new Employee
+	// Route: Create new Employee
 	app.Post("/api/employee", CreateEmployee)
 
-	// Update an existing employee
+	// Route: Update an existing employee
 	app.Put("/api/employee/:id", UpdateEmployee)
 
-	// Delete employee by ID
+	// Route: Delete employee by ID
 	app.Delete("/api/employee/:id", DeleteEmployeeByID)
 
 	// Run the server on port 8080
