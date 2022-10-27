@@ -5,6 +5,8 @@ import (
 	"log"
 	"time"
 
+	"github.com/anupam/hrms-with-fiber-mongodb/pkg/model"
+
 	"github.com/gofiber/fiber/v2"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -12,13 +14,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-// Model: Instance for Mongo
-type MongoInstance struct {
-	Client *mongo.Client
-	Db     *mongo.Database
-}
-
-var mg MongoInstance
+var mg model.MongoInstance
 
 // Name of the DB
 const dbName = "fiber-hrms"
@@ -26,14 +22,6 @@ const dbName = "fiber-hrms"
 // const mongoURI = "mongodb://localhost:27017" + dbName
 // Uri for (my) mongo atlas cluster
 const mongoURI = "mongodb+srv://dummyUser:Yma6hMB7DmuvUjcN@cluster0.hdt7puu.mongodb.net/test"
-
-// Model: Employee
-type Employee struct {
-	ID     string  `json:"id,omitempty" bson:"_id,omitempty"`
-	Name   string  `json:"name"`
-	Salary float64 `json:"salary"`
-	Age    float64 `json:"age"`
-}
 
 // Configure: Connect to Mongo DB
 func Connect() error {
@@ -52,7 +40,7 @@ func Connect() error {
 		return err
 	}
 
-	mg = MongoInstance{
+	mg = model.MongoInstance{
 		Client: client,
 		Db:     db,
 	}
@@ -67,7 +55,7 @@ var GetAllEmployee = func(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(500).SendString(err.Error())
 	}
-	var employees []Employee = make([]Employee, 0)
+	var employees []model.Employee = make([]model.Employee, 0)
 
 	if err := cursor.All(c.Context(), &employees); err != nil {
 		return c.Status(500).SendString(err.Error())
@@ -84,7 +72,7 @@ var GetEmployeeByID = func(c *fiber.Ctx) error {
 		return c.SendStatus(400)
 	}
 
-	employee := new(Employee)
+	employee := new(model.Employee)
 
 	query := bson.D{{Key: "_id", Value: id}}
 
@@ -101,7 +89,7 @@ var GetEmployeeByID = func(c *fiber.Ctx) error {
 // Handler: Create a new Employee
 var CreateEmployee = func(c *fiber.Ctx) error {
 	collection := mg.Db.Collection("employees")
-	employee := new(Employee)
+	employee := new(model.Employee)
 	if err := c.BodyParser(employee); err != nil {
 		return c.Status(400).SendString(err.Error())
 	}
@@ -117,7 +105,7 @@ var CreateEmployee = func(c *fiber.Ctx) error {
 	filter := bson.D{{Key: "_id", Value: insertionResult.InsertedID}}
 	createRecord := collection.FindOne(c.Context(), filter)
 
-	createdEmployee := &Employee{}
+	createdEmployee := &model.Employee{}
 	createRecord.Decode(createdEmployee)
 
 	return c.Status(201).JSON(createdEmployee)
@@ -132,7 +120,7 @@ var UpdateEmployee = func(c *fiber.Ctx) error {
 		return c.SendStatus(400)
 	}
 
-	employee := new(Employee)
+	employee := new(model.Employee)
 
 	if err := c.BodyParser(employee); err != nil {
 		return c.Status(400).SendString(err.Error())
