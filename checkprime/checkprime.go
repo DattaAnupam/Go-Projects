@@ -1,7 +1,9 @@
 package checkprime
 
 // Simplest form of Checking Prime number
-func CheckPrime(num int) bool {
+func CheckPrime(num int) (bool, []int) {
+	// Prime number is divisible by 1
+	var factors []int = []int{1}
 	var isPrime bool = true
 
 	for i := 2; i <= (num/2)+1; i++ {
@@ -9,11 +11,13 @@ func CheckPrime(num int) bool {
 			continue
 		} else {
 			isPrime = false
-			break
+			factors = append(factors, i)
 		}
 	}
 
-	return isPrime
+	// Prime number is divisible by it self
+	factors = append(factors, num)
+	return isPrime, factors
 }
 
 // Complex One than CheckPrime()
