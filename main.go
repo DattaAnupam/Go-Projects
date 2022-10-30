@@ -13,7 +13,8 @@ func main() {
 	fmt.Scanln(&num)
 
 	// check Prime or not
-	isPrime := checkprime.CheckPrime(num)
+	// isPrime := checkprime.CheckPrime(num)
+	isPrime := checkprime.CheckPrime_Method2(num)
 	// if prime print message
 	if isPrime {
 		fmt.Printf("%d is a Prime number", num)
