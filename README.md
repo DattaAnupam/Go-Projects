@@ -21,4 +21,5 @@ Solution: inside terminal type `go env -w GO111MODULE=auto` (1 -> One, not L in 
     <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/email-verifier" target=_blank>EMAIL-VERIFIER</a></li>
     <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/go-fiber-crm-basic" target=_blank>CRM With Go-Fiber and MySql</a></li>
     <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/hrms-with-fiber-mongodb" target=_blank>HRMS With Go-Fiber and Mongo Db (Mongo Atlas)</a></li>
+    <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/programs/prime-not-prime" target=_blank>Prime or Not Prime</a></li>
 </ol>
