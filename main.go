@@ -23,12 +23,13 @@ func main() {
 		"Abhijit",
 	}
 
+	// Add go routine counts
 	wg.Add(len(names))
 
 	for i, name := range names {
 		go PrintSomething(fmt.Sprintf("%d: %s", i, name), &wg)
 	}
-
+	// Wait until all go routines are performed
 	wg.Wait()
 
 	wg.Add(1)
