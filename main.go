@@ -2,8 +2,36 @@ package main
 
 import (
 	"fmt"
+	"sync"
 )
 
+func PrintSomething(name string, wg *sync.WaitGroup) {
+	defer wg.Done()
+
+	fmt.Println(name)
+}
+
 func main() {
-	fmt.Println("Initial Code Structure")
+	var wg sync.WaitGroup
+
+	names := []string{
+		"Anupam",
+		"Bapi",
+		"Tapas",
+		"Roxy",
+		"Shubhrojit",
+		"Abhijit",
+	}
+
+	wg.Add(len(names))
+
+	for i, name := range names {
+		go PrintSomething(fmt.Sprintf("%d: %s", i, name), &wg)
+	}
+
+	wg.Wait()
+
+	wg.Add(1)
+	go PrintSomething("Final Name", &wg)
+	wg.Wait()
 }
