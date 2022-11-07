@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func Test_main(t *testing.T) {
+func TestMain(t *testing.T) {
 	stdOut := os.Stdout
 	r, w, _ := os.Pipe()
 
