@@ -2,37 +2,34 @@ package main
 
 import (
 	"fmt"
-	"sync"
 )
 
-func PrintSomething(name string, wg *sync.WaitGroup) {
-	defer wg.Done()
+var msg string
 
-	fmt.Println(name)
+func updateMessage(s string) {
+	msg = s
+}
+
+func printMessage() {
+	fmt.Println(msg)
 }
 
 func main() {
-	var wg sync.WaitGroup
 
-	names := []string{
-		"Anupam",
-		"Bapi",
-		"Tapas",
-		"Roxy",
-		"Shubhrojit",
-		"Abhijit",
-	}
+	// challenge: modify this code so that the calls to updateMessage() on lines
+	// 28, 30, and 33 run as goroutines, and implement wait groups so that
+	// the program runs properly, and prints out three different messages.
+	// Then, write a test for all three functions in this program: updateMessage(),
+	// printMessage(), and main().
 
-	// Add go routine counts
-	wg.Add(len(names))
+	msg = "Hello, world!"
 
-	for i, name := range names {
-		go PrintSomething(fmt.Sprintf("%d: %s", i, name), &wg)
-	}
-	// Wait until all go routines are performed
-	wg.Wait()
+	updateMessage("Hello, universe!")
+	printMessage()
 
-	wg.Add(1)
-	go PrintSomething("Final Name", &wg)
-	wg.Wait()
+	updateMessage("Hello, cosmos!")
+	printMessage()
+
+	updateMessage("Hello, world!")
+	printMessage()
 }
