@@ -1,26 +1,19 @@
-# Go-Projects
+# Armstrong Number / Narcissistic Number
+In number theory, a narcissistic number in a given number base b is a number that is the sum of its own digits each raised to the power of the number of digits.
 
-This Repo contains small projects on go language to touch various aspects of Go Language
+## Explanation
+153 is an Armstrong / Narcissistic Number?
 
-#### To Build
-> type "go build" inside terminal.
+> Total number of digits in 153 = 3 (1, 5, 3)
+<br>Therefore, raise 3 as power of each digit and add the results.
+<br>1^3 + 5^3 + 3^3 = 3 + 125 + 27 = 153
 
-#### Error: `go: go.mod file not found in current directory or any parent directory;...`
-Solution: inside terminal type `go env -w GO111MODULE=auto` (1 -> One, not L in small)
+So the given input is equals to the result we get after powering the digits and adding the results.
 
-#### To Run 
-> 1. Double click on .exe file
-> 2. type `go run <file_name.go>`
+Hence 153 is an Armstrong / Narcissistic Number.
 
-#### List of Projects:
-<ol>
-    <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/go-server" target=_blank>GO-SERVER</a></li>
-    <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/book-store-crud" target=_blank>BOOK-STORE-CRUD</a></li>
-    <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/movie-management-crud" target=_blank>MOVIE-MANAGEMENT-CRUD</a></li>
-    <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/book-management-crud" target=_blank>BOOK-MANAGEMENT-CRUD</a></li>
-    <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/go-with-mysql" target=_blank>GO-WITH-MYSQL</a></li>
-    <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/email-verifier" target=_blank>EMAIL-VERIFIER</a></li>
-    <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/go-fiber-crm-basic" target=_blank>CRM With Go-Fiber and MySql</a></li>
-    <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/hrms-with-fiber-mongodb" target=_blank>HRMS With Go-Fiber and Mongo Db (Mongo Atlas)</a></li>
-    <li><a href="https://github.com/DattaAnupam/Go-Projects/tree/programs/prime-not-prime" target=_blank>Prime or Not Prime</a></li>
-</ol>
+1201 is an Armstrong / Narcissistic Number?
+
+> total digits = 4
+<br> 1^4 + 2^4 + 0^4 + 1^4 = 1 + 2 + 0 + 1 = 4
+<br> 1201 &#x2260; 4
