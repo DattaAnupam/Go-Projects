@@ -13,5 +13,6 @@ func main() {
 	fmt.Scanln(&num)
 
 	// Find Armstrong or not
-	utility.ArmstrongOrNot_1(num)
+	// utility.ArmstrongOrNot_1(num)
+	utility.ArmstrongOrNot_2(num)
 }

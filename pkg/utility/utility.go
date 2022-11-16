@@ -2,8 +2,13 @@ package utility
 
 import (
 	"fmt"
+	"math"
+	"strconv"
 )
 
+// ArmstrongOrNot_1 checks whether input number is an armstrong
+// all are done using basic logic
+// no complex go packages has been used
 func ArmstrongOrNot_1(num int) {
 	// Copy the original number
 	orgNum := num
@@ -47,5 +52,29 @@ func ArmstrongOrNot_1(num int) {
 		fmt.Printf("%d is an Armstrong number.", orgNum)
 	} else {
 		fmt.Printf("%d is not an Armstrong Number.", orgNum)
+	}
+}
+
+// ArmstrongOrNot_2 finds whether the input number is an armstring
+// it uses go packages
+func ArmstrongOrNot_2(num int) {
+	// convert to string
+	strNum := strconv.Itoa(num)
+
+	// find number of digits
+	base := len(strNum)
+
+	var total int
+
+	for _, n := range strNum {
+		digit, _ := strconv.Atoi(string(n))
+		total = total + int(math.Pow(float64(digit), float64(base)))
+	}
+
+	// check for equality
+	if total == num {
+		fmt.Printf("%d is an armstrong number!!!", num)
+	} else {
+		fmt.Printf("%d is not an armstrong number!!!", num)
 	}
 }
